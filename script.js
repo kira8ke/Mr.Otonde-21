@@ -210,6 +210,11 @@ function resetTodayProgress(){
   saveProgress();
   return true;
 }
+function resetAllProgress(){
+  progress = { unlockedIds: [], unlockTimestamps: {}, lastSpinDate: null };
+  saveProgress();
+  return true;
+}
 function isUnlocked(id){
   return progress.unlockedIds.includes(id);
 }
@@ -259,7 +264,11 @@ function updateWheelAvailability(){
 function initApp(){
   loadProgress();
   const params = new URLSearchParams(window.location.search);
-  if((params.has('resetToday') || params.has('reset')) && resetTodayProgress()){
+  if(params.has('resetAll')){
+    resetAllProgress();
+    loadProgress();
+    showGridNote("All progress has been reset. Start fresh now.");
+  } else if((params.has('resetToday') || params.has('reset')) && resetTodayProgress()){
     showGridNote("Today's unlock has been reset. You can spin again.");
   }
   if(progress.unlockedIds.length === CARDS_DATA.length){
@@ -331,8 +340,17 @@ function startIntro(){
 // Most browsers block audio until a user gesture. We still run the visual
 // sequence immediately; if audio is blocked it will simply stay silent
 // until the first click (Spin/Continue buttons), which is fine.
-initApp();
-document.body.addEventListener('click', ()=>{ if(ctx && ctx.state === 'suspended') ctx.resume(); }, { once:false });
+const bgMusic = document.getElementById('bgMusic');
+let musicStarted = false;
+
+document.body.addEventListener('click', ()=>{
+  if(ctx && ctx.state === 'suspended') ctx.resume();
+  if(bgMusic && !musicStarted){
+    bgMusic.volume = 0.5;
+    bgMusic.play().catch(()=>{});
+    musicStarted = true;
+  }
+}, { once:false });
 
 goToWheelBtn.addEventListener('click', ()=>{
   playClick();
@@ -349,6 +367,10 @@ const spinBtn = document.getElementById('spinBtn');
 const resultBanner = document.getElementById('resultBanner');
 const resultText = document.getElementById('resultText');
 const goToGridBtn = document.getElementById('goToGridBtn');
+const cardGrid = document.getElementById('cardGrid');
+let gridRendered = false;
+
+initApp();
 
 const SLICE = 360 / 21;
 let wheelBuilt = false;
