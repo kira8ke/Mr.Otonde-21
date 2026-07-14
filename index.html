@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+<title>Nigel Turns 21</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kavoon:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div id="stage">
+
+  <!-- ============ INTRO SCREEN ============ -->
+  <section class="screen active" id="screen-intro">
+    <div class="jungle-bg"></div>
+    <div class="road"></div>
+
+    <div class="car-wrap" id="carWrap">
+      <img src="" alt="Nigel driving in" id="charCarImg" class="car-img">
+      <div class="dust dust-1"></div>
+      <div class="dust dust-2"></div>
+      <div class="dust dust-3"></div>
+    </div>
+
+    <div class="speech-stage" id="speechStage">
+      <div class="speech-bubble" id="speechBubble">
+        <p id="typedLine"></p>
+      </div>
+    </div>
+
+    <button class="spin-cta hidden" id="goToWheelBtn">SPIN THE WHEEL</button>
+  </section>
+
+  <!-- ============ WHEEL SCREEN ============ -->
+  <section class="screen" id="screen-wheel">
+    <div class="jungle-bg"></div>
+    <h1 class="wheel-title henny">Spin for today's goal!</h1>
+
+    <div class="wheel-area">
+      <div class="wheel-pointer"></div>
+      <div class="wheel" id="wheel"></div>
+    </div>
+
+    <button class="spin-btn" id="spinBtn">SPIN</button>
+    <p class="wheel-note hidden" id="wheelNote"></p>
+
+    <div class="result-banner hidden" id="resultBanner">
+      <p class="result-text henny" id="resultText"></p>
+      <button class="spin-cta" id="goToGridBtn">SEE MY GOALS</button>
+    </div>
+  </section>
+
+  <!-- ============ GRID SCREEN ============ -->
+  <section class="screen" id="screen-grid">
+    <div class="jungle-bg jungle-bg--grid"></div>
+
+    <header class="grid-header">
+      <h1 class="henny">Nigel's 21 Goals</h1>
+      <p class="grid-note hidden" id="gridNote"></p>
+      <p class="grid-sub">One box unlocks every visit. Keep coming back &mdash; you'll get to all 21.</p>
+    </header>
+
+    <div class="card-grid" id="cardGrid"></div>
+  </section>
+
+  <!-- ============ PERSISTENT CHARACTER ============ -->
+  <div class="buddy" id="buddy">
+    <img src="" alt="Nigel" id="charSmallImg">
+  </div>
+
+  <!-- ============ CARD OPEN MODAL ============ -->
+  <div class="modal-overlay hidden" id="modalOverlay">
+    <div class="modal-card" id="modalCard">
+      <button class="modal-close" id="modalClose">&times;</button>
+      <div class="modal-number henny" id="modalNumber"></div>
+      <div class="modal-body">
+        <div class="modal-title-block">
+          <h2 class="modal-title henny" id="modalTitle"></h2>
+          <p class="modal-date" id="modalDate"></p>
+        </div>
+        <p class="modal-desc" id="modalDesc"></p>
+      </div>
+      <img class="modal-image hidden" id="modalImage" alt="">
+    </div>
+  </div>
+
+  <canvas id="confetti"></canvas>
+
+  <button class="mute-btn" id="muteBtn" title="Mute/unmute sound">&#128266;</button>
+
+</div>
+
+<script src="assets.js"></script>
+<script src="cards-data.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
