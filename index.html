@@ -88,7 +88,14 @@
   </div>
 
   <canvas id="confetti"></canvas>
-  <audio id="bgMusic" src="assets/background-music.mp3" preload="auto" loop></audio>
+  <div class="audio-embed-shell" id="audioEmbedShell" aria-hidden="true">
+    <iframe id="bgMusicEmbed"
+      src="https://audio.com/embed/v2/audio/1834222432798045?theme=light&layout=fixed&cover=true&footer=true&author=true&watermark=true&autoplay=true&volume=0.3"
+      style="display:block; border:none; height:235px; width:100%; max-width:500px; border-radius:1px;"
+      loading="lazy"
+      data-audiocom-embed></iframe>
+  </div>
+  <script src="https://audio.com/embed.js" async></script>
 
   <button class="mute-btn" id="muteBtn" title="Mute/unmute sound">&#128266;</button>
 

@@ -338,17 +338,14 @@ function startIntro(){
 }
 
 // Most browsers block audio until a user gesture. We still run the visual
-// sequence immediately; if audio is blocked it will simply stay silent
-// until the first click (Spin/Continue buttons), which is fine.
-const bgMusic = document.getElementById('bgMusic');
-let musicStarted = false;
+// sequence immediately; the requested audio.com player is embedded and will
+// start once the page is activated by the first user interaction.
+const bgMusicEmbed = document.getElementById('bgMusicEmbed');
 
 document.body.addEventListener('click', ()=>{
   if(ctx && ctx.state === 'suspended') ctx.resume();
-  if(bgMusic && !musicStarted){
-    bgMusic.volume = 0.5;
-    bgMusic.play().catch(()=>{});
-    musicStarted = true;
+  if(bgMusicEmbed){
+    bgMusicEmbed.setAttribute('data-volume', '0.3');
   }
 }, { once:false });
 
@@ -470,9 +467,6 @@ goToGridBtn.addEventListener('click', ()=>{
 /* ============================================================
    GRID
 ============================================================ */
-const cardGrid = document.getElementById('cardGrid');
-let gridRendered = false;
-
 function renderGrid(){
   cardGrid.innerHTML = '';
   CARDS_DATA.forEach(card => {
